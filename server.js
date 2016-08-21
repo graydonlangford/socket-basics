@@ -1,5 +1,7 @@
-var PORT = process.env.PORT || 3000
 var express = require('express')
+var moment = require('moment')
+var PORT = process.env.PORT || 3000
+
 var app = express()
 var http = require('http').Server(app)
 var io = require('socket.io')(http)
@@ -15,6 +17,7 @@ io.on('connection', function (socket) {
   })
 
   socket.emit('message', {
+    timestamp: moment().valueOf(),
     text: 'Welcome to the chat application'
   })
 })
